@@ -3,7 +3,7 @@
 <head>
   <title>Aymard Asset Recovery — Total Recovered</title>
 
-  <!-- Google Font: Barlow Semi Condensed -->
+  <!-- Google Font -->
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@400;600;700&display=swap" rel="stylesheet">
 
   <style>
@@ -16,7 +16,7 @@
     }
 
     .logo {
-      width: 450px;   /* Wider because the image is thin */
+      width: 450px;
       margin-bottom: 40px;
     }
 
@@ -27,7 +27,7 @@
       color: #222;
     }
 
-    p {
+    #amount {
       font-size: 56px;
       font-weight: 700;
       margin-top: 10px;
@@ -44,7 +44,36 @@
 
   <h1>So far, I've helped my clients claim...</h1>
 
-  <p>$0</p>
+  <!-- Animated Amount -->
+  <div id="amount">$0</div>
+
+  <script>
+    // 🔢 SET YOUR REAL TOTAL HERE:
+    const finalAmount = 300;  // <-- CHANGE THIS WHEN YOU GET FUNDS RECOVERED
+
+    // Animation settings
+    let current = 0;
+    const duration = 2000; // animation length in ms
+    const fps = 60;
+    const step = finalAmount / (duration / (1000 / fps));
+
+    function animateCounter() {
+      current += step;
+      if (current >= finalAmount) {
+        current = finalAmount;
+      }
+
+      // Format with commas
+      document.getElementById("amount").innerText = 
+        "$" + Math.floor(current).toLocaleString();
+
+      if (current < finalAmount) {
+        requestAnimationFrame(animateCounter);
+      }
+    }
+
+    animateCounter();
+  </script>
 
 </body>
 </html>
